@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const port = 8000;
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
-const cors = require('cors');
-
 dotenv.config();
 
 async function db() {
@@ -17,7 +15,7 @@ db();
 
 
 app.use(express.json());
-app.use(cors());
+
 
 
 app.use('/api/user', authRoute);

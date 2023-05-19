@@ -6,13 +6,7 @@ const config = {
     extend: {},
   },
 
-  plugins: [
-    require('daisyui')
-  ],
-
-  daisyui: {
-    themes: ["valentine"]
-  }
+  plugins: [],
 };
 
 module.exports = config;

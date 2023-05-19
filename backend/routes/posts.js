@@ -5,12 +5,7 @@ const {postValidation} = require('../validation');
 
 router.get('/', verify, async (req, res) => {
     const posts = await Post.find();
-    
-    res.send({
-        postList: posts,
-        success: true
-    });
-
+    res.send(posts);
 });
 
 router.post('/create', verify, async (req, res) => {
