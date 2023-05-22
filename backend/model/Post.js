@@ -14,6 +14,9 @@ const postSchema = new mongoose.Schema({
         min: 1,
         max: 255
     },
+    userName: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now
