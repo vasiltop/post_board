@@ -36,7 +36,7 @@
     <div class="hero-content flex-col">
         <input type="text" placeholder="Name" class="input input-bordered w-full max-w-xs" bind:value={nameInput}/>
         <input type="text" placeholder="Email" class="input input-bordered w-full max-w-xs" bind:value={emailInput}/>
-        <input type="text" placeholder="Password" class="input input-bordered w-full max-w-xs" bind:value={passwordInput} />
+        <input type="password" placeholder="Password" class="input input-bordered w-full max-w-xs" bind:value={passwordInput} />
         <button class="btn" on:click={registerButton}>Register</button>
         <a href="http://localhost:5173/login"> Already have an account? Login here.</a>
     </div>

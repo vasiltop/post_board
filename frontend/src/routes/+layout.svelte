@@ -35,7 +35,7 @@
 <div class="navbar bg-base-200">
 
   <div class="flex-1">
-    <p class="text-xl">website</p>
+    <a href="http://localhost:5173"> <p class="text-xl">website</p> </a>
   </div>
   
   <div class="justify-end space-x-3">

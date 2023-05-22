@@ -16,7 +16,10 @@ router.get('/', verify, async (req, res) => {
 
 router.post('/create', verify, async (req, res) => {
     const {error} = postValidation(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.send({
+        error: error.details[0].message,
+        success: false
+    });
     
     const n = await User.findById({_id: req.user._id});
     
@@ -28,10 +31,13 @@ router.post('/create', verify, async (req, res) => {
 
     try { 
         const savedPost = await post.save();
-        res.send(savedPost);
+        res.send({success: true});
     } catch (err) {
-        res.status(400).send(err);
-    }
+        res.send({
+            error: err,
+            success: false
+        });
+    };
 });
 
 
