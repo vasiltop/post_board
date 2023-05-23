@@ -17,13 +17,13 @@
         });
 
         const data = await response.json();
-        console.log(data);
+       
         if(data.success) {
             window.alert("Post created succesfully");
         } else {
             window.alert(data.error);
         }
-    }
+    };
 </script>
 
 <div class="hero bg-base-100  min-h-screen">
