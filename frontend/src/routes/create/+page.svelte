@@ -30,7 +30,7 @@
     <div class="hero-content flex-col">
         <input type="text" placeholder="Title" bind:value={titleInput} class="input input-bordered w-full max-w-xs" />
         <textarea class="textarea textarea-bordered" bind:value={contentInput} placeholder="Content"></textarea>
-        <button class="btn" on:click={createPost}>Submit</button>
+        <button class="btn" on:click={createPost}>Create Post</button>
     </div>
 </div>
 
