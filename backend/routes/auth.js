@@ -81,12 +81,29 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/me', verify, async (req, res) => {
-    
+    const user = await User.findById({_id: req.user._id})
     res.send(
         {
-            user : req.user,
+            user : user,
             success: true
         });
-
 });
+
+router.get('/info/:userId', async (req, res) => {
+
+    try {
+        const user = await User.findById({_id: req.params.userId});
+
+        res.send({
+            user: user,
+            success: true
+        });
+    } catch(err) {
+        res.send({
+            success: false
+        });
+    }
+    
+}),
+
 module.exports = router;

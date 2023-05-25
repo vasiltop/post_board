@@ -14,6 +14,9 @@ const postSchema = new mongoose.Schema({
         min: 1,
         max: 255
     },
+    userId: {
+        type: String
+    },
     userName: {
         type: String
     },

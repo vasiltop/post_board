@@ -14,6 +14,16 @@ router.get('/', verify, async (req, res) => {
 
 });
 
+router.get('/:postId', verify, async (req, res) => {
+    const post = await Post.findById({_id: req.params.postId});
+
+    res.send({
+        success: true,
+        postData: post
+    });
+
+});
+
 router.post('/create', verify, async (req, res) => {
     const {error} = postValidation(req.body);
     if(error) return res.send({
@@ -26,6 +36,7 @@ router.post('/create', verify, async (req, res) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
+        userId: req.user._id,
         userName: n.name
     });
 

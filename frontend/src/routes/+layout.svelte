@@ -5,6 +5,7 @@
   import { user } from '../stores/auth'
   
 	onMount(async () => {
+    
 		const response = await fetch('http://localhost:8000/api/user/me', {
       method: 'GET',
       headers: {
@@ -15,6 +16,9 @@
     const data = await response.json();
     $user = data.success;
     
+    if(!data.success) {
+        goto('/login');
+    };
 	});
 
   async function logOut() {
@@ -29,13 +33,13 @@
   }
   
   $:loggedIn = $user;
-
+  
 </script>
 
 <div class="navbar bg-base-200">
 
   <div class="flex-1">
-    <a href="http://localhost:5173"> <p class="text-xl">website</p> </a>
+    <a href="http://localhost:5173"> <p class="text-xl">PostBoard</p> </a>
   </div>
   
   <div class="justify-end space-x-3">
