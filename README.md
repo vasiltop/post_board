@@ -1,1 +1,1 @@
-<h1> This repository contains the source code for the PostBoard website.</h1>
+<h3> This repository contains the source code for the PostBoard website. </h3>
