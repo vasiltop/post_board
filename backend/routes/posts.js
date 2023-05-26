@@ -27,7 +27,7 @@ router.get('/:postId', verify, async (req, res) => {
 router.post('/create', verify, async (req, res) => {
     const {error} = postValidation(req.body);
     if(error) return res.send({
-        error: error.details[0].message,
+        err: error.details[0].message,
         success: false
     });
     
@@ -43,9 +43,9 @@ router.post('/create', verify, async (req, res) => {
     try { 
         const savedPost = await post.save();
         res.send({success: true});
-    } catch (err) {
+    } catch (error) {
         res.send({
-            error: err,
+            err: error,
             success: false
         });
     };
