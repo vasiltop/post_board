@@ -7,8 +7,18 @@ const {postValidation} = require('../validation');
 router.get('/', verify, async (req, res) => {
     const posts = await Post.find();
     
+
+    const mapped = posts.map(p => {
+        let a = p.toObject();
+        a.liked = a.likes.includes(req.user._id);
+        a.likes = a.likes.length;
+
+        return a;
+    });
+
+    
     res.send({
-        postList: posts,
+        postList: mapped,
         success: true
     });
 
@@ -24,6 +34,35 @@ router.get('/:postId', verify, async (req, res) => {
 
 });
 
+router.get('/:postId/like', verify, async (req, res) => {
+    const post = await Post.updateOne({_id: req.params.postId}, { $addToSet: {likes: req.user._id}});
+
+    if(!post.matchedCount) {
+        return res.status(404).send();
+    }
+
+    if(!post.modifiedCount) {
+        return res.status(204).send();
+    }
+
+    res.send();
+
+});
+
+router.get('/:postId/unlike', verify, async (req, res) => {
+    const post = await Post.updateOne({_id: req.params.postId}, { $pull: {likes: req.user._id}});
+
+    if(!post.matchedCount) {
+        return res.status(404).send();
+    }
+
+    if(!post.modifiedCount) {
+        return res.status(204).send();
+    }
+
+    res.send();
+});
+
 router.post('/create', verify, async (req, res) => {
     const {error} = postValidation(req.body);
     if(error) return res.send({
@@ -37,7 +76,8 @@ router.post('/create', verify, async (req, res) => {
         title: req.body.title,
         content: req.body.content,
         userId: req.user._id,
-        userName: n.name
+        userName: n.name,
+        likes: []
     });
 
     try { 
@@ -50,6 +90,7 @@ router.post('/create', verify, async (req, res) => {
         });
     };
 });
+
 
 
 module.exports = router;

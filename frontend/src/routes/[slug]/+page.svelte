@@ -27,7 +27,8 @@
 <div class="hero min-h-screen">
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-        <h2 class="card-title">{responseJSON.postData.title}</h2>
+        <h2 class="card-title"><a href={"http://localhost:5173/" + data.slug} class="w-80 break-words"> {responseJSON.postData.title} </a></h2>
+        
         <p class="w-80 break-words">{responseJSON.postData.content}</p>
         <p> <a href={"http://localhost:5173/profile/" + responseJSON.postData.userId}> Posted by {responseJSON.postData.userName} </a>on {responseJSON.postData.date}</p>
         </div>

@@ -20,6 +20,9 @@ const postSchema = new mongoose.Schema({
     userName: {
         type: String
     },
+    likes: {
+        type: [String]
+    },
     date: {
         type: Date,
         default: Date.now

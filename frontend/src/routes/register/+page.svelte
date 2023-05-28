@@ -29,7 +29,7 @@
             error = data.err;
         }
         
-    }
+    };
 
 </script>
 
