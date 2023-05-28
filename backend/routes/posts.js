@@ -5,6 +5,7 @@ const User = require('../model/User');
 const {postValidation} = require('../validation');
 
 router.get('/', verify, async (req, res) => {
+
     const posts = await Post.find();
     
 
@@ -12,6 +13,8 @@ router.get('/', verify, async (req, res) => {
         let a = p.toObject();
         a.liked = a.likes.includes(req.user._id);
         a.likes = a.likes.length;
+        
+        
 
         return a;
     });
@@ -25,12 +28,24 @@ router.get('/', verify, async (req, res) => {
 });
 
 router.get('/:postId', verify, async (req, res) => {
-    const post = await Post.findById({_id: req.params.postId});
 
-    res.send({
-        success: true,
-        postData: post
-    });
+    try {
+        const post = await Post.findById({_id: req.params.postId});
+    
+        let p = post.toObject();
+        p.liked = p.likes.includes(req.user._id);
+        p.likes = p.likes.length;
+        
+        
+
+        res.send({
+            success: true,
+            postData: p
+        });
+    } catch (error) {
+        res.status(404).send();
+    }
+    
 
 });
 
