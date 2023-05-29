@@ -96,7 +96,7 @@ router.post('/create', verify, async (req, res) => {
     });
 
     try { 
-        const savedPost = await post.save();
+        await post.save();
         res.send({success: true});
     } catch (error) {
         res.status(500).send({
