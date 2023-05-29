@@ -80,7 +80,7 @@ router.get('/:postId/unlike', verify, async (req, res) => {
 
 router.post('/create', verify, async (req, res) => {
     const {error} = postValidation(req.body);
-    if(error) return res.send({
+    if(error) return res.status(403).send({
         err: error.details[0].message,
         success: false
     });
@@ -99,7 +99,7 @@ router.post('/create', verify, async (req, res) => {
         const savedPost = await post.save();
         res.send({success: true});
     } catch (error) {
-        res.send({
+        res.status(500).send({
             err: error,
             success: false
         });

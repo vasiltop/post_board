@@ -62,7 +62,8 @@
             });
             post.likes--;
         };
-
+        
+        
         postArray = postArray;
     };
     
@@ -95,17 +96,17 @@
             <option>Sort By Likes</option>
         </select>
 
-        {#each postArray as post}
+        {#each Array(postsShown) as _, i}
         
         <div class="card w-96 bg-base-100 shadow-xl">
             <div class="card-body">
-              <h2 class="card-title"><a href={"http://localhost:5173/" + post._id} class="w-80 break-words"> {post.title} </a></h2>
-              <p class="w-80 break-words">{post.content}</p>
+              <h2 class="card-title"><a href={"http://localhost:5173/" + postArray[i]._id} class="w-80 break-words"> {postArray[i].title} </a></h2>
+              <p class="w-80 break-words">{postArray[i].content}</p>
               
               <div class="flex space-x-3">
-                <p> <a href={"http://localhost:5173/profile/" + post.userId}> Posted by {post.userName}</a></p>
-                <input type="checkbox" class="checkbox" checked={post.liked} on:change={() => updateLikes(post)} />
-                <p>{post.likes}</p>
+                <p> <a href={"http://localhost:5173/profile/" + postArray[i].userId}> Posted by {postArray[i].userName}</a></p>
+                <input type="checkbox" class="checkbox" checked={postArray[i].liked} on:change={() => updateLikes(postArray[i])} />
+                <p>{postArray[i].likes}</p>
 
               </div>
               

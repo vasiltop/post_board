@@ -8,7 +8,7 @@ const verify = require('./verifyToken')
 router.post('/register', async (req, res) => {
 
     const {error} = registerValidation(req.body);
-    if(error) return res.send(
+    if(error) return res.status(403).send(
         {
             success: false,
             err: error.details[0].message
@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
 
 
     const emailExist = await User.findOne({email: req.body.email});
-    if(emailExist) return res.send(
+    if(emailExist) return res.status(400).send(
         {
             success: false,
             err: "This email already exists."
@@ -42,7 +42,7 @@ router.post('/register', async (req, res) => {
             }
             );
     } catch (error) {
-        res.send(
+        res.status(500).send(
             {
                 success: false,
                 err: error.details[0].message
@@ -53,21 +53,21 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const {error} = loginValidation(req.body);
-    if(error) return res.send({
+    if(error) return res.status(403).send({
         success: false,
         err: error.details[0].message
     });
     
 
     const user = await User.findOne({email: req.body.email});
-    if(!user) return res.send({
+    if(!user) return res.status(400).send({
         success: false,
         err: "Email or Password is incorrect."
     });
 
     const validPass = await bcrypt.compare(req.body.password, user.password);
 
-    if(!validPass) return res.send({
+    if(!validPass) return res.status(400).send({
         success: false,
         err: "Email or Password is incorrect."
     });
@@ -99,7 +99,7 @@ router.get('/info/:userId', async (req, res) => {
             success: true
         });
     } catch(err) {
-        res.send({
+        res.status(404).send({
             success: false
         });
     }
